@@ -5,15 +5,12 @@ const firstLetterUp = (name) => {
 
 const sayHello = (name) => {
 
-    if (typeof name !== "string")
-        return 'Enter your name';
-    correctedName = name.charAt(0).toUpperCase() + name.toLowerCase().slice(1);
+    if (typeof name !== "string") return 'Enter your name';
+    const FAVORITE_NAME = 'mark';
+    const isMark = name.toLowerCase() === FAVORITE_NAME;
+    const specialWord = isMark ? "Hi" : "Hello";
 
-    if (correctedName !== "Mark")
-        return `Hello, ${correctedName}!`;
-
-    return `Hi, ${correctedName}!`;
-
+    return `${specialWord }, ${name}!`;
 };
 console.log(sayHello('Oleg'));
 console.log(sayHello('Viktor'));
@@ -24,8 +21,9 @@ console.log(sayHello('Mark'));
 
 // 2nd task. arrow function
 const calcHypotenuse = (n, m) => {
-
-    const hypotenuse = Math.sqrt(n * n + m * m) // hurried up with the first task solution :)
+    if (typeof n !== 'number' || typeof m !== 'number')
+        return 'Give me a number';
+    const hypotenuse = Math.sqrt(Math.pow(n, 2) + Math.pow(m, 2));
     return (hypotenuse);
 };
 console.log(calcHypotenuse(3, 4));
@@ -35,9 +33,9 @@ console.log(calcHypotenuse(3, 4));
 const min = (a, b) => {
     if (typeof a !== "number" || typeof b !== "number")
         return 'Enter a number';
-    if (a < b)
-        return a;
-    return b;
+
+    return Math.min(a, b);
+
 }
 console.log(min(2, 5));
 console.log(min(3, -1));
@@ -49,7 +47,7 @@ const isEven = (x) => {
     if (typeof x !== "number")
         return 'this is not a number'
 
-    return (x % 2) == 0;
+    return (x % 2) === 0;
 
 }
 console.log(isEven(4));
@@ -71,16 +69,13 @@ console.log(deleteChars('A'));
 // 6th task. arrow function
 
 const charCaseChanger = (value) => {
-    if (typeof value !== 'string' ||
-        typeof value == 'string' &&
-        value.trim().indexOf(' ') >= 0
-    )
+    if (typeof value !== 'string')
         return 'enter correct value';
 
-    const firstLetter = value.charAt(0).toUpperCase();
-    correctedValue = firstLetter + value.toLowerCase().slice(1);
+    const firstLetter = value[0].toUpperCase();
+    const wordRest = value.slice(1).toLowerCase();
 
-    return correctedValue;
+    return `${firstLetter}${wordRest}`;
 }
 console.log(charCaseChanger('пиТеР'));
 console.log(charCaseChanger('javaScript'));
@@ -89,14 +84,14 @@ console.log(charCaseChanger('javaScript'));
 
 // 9th task. arrow function
 
-const stringCutter = (stringValue, maxLength) => {
-    if (typeof stringValue !== 'string' && maxLength !== 'number')
+const stringCutter = (stringValue, charsQuantity) => {
+    if (typeof stringValue !== 'string' && typeof charsQuantity !== 'number')
         return 'first enter a string, then a number'
-    if (stringValue.length > maxLength) {
-        slicedValue = stringValue.slice(0, maxLength) + '...';
-        return slicedValue;
-    } else {
-        return stringValue;
+    if (stringValue.length > charsQuantity) {
+
+        return `${stringValue.slice(0, charsQuantity)}...`;
     }
+    return stringValue;
+
 }
 console.log(stringCutter('Привет мир!', 6));
