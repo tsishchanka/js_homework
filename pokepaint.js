@@ -64,11 +64,11 @@ pokemonPaint(pokeName)
 //2 
 
 const currentArray = [1, 2, 3];
-const myMap = (arr, callback, thisArg) => {
+const myMap = (arr, callback, currentArray) => {
     let i, length = arr.length,
         results = [];
     for (i = 0; i < length; i++) {
-        results.push(callback.call(thisArg, arr[i], i, arr));
+        results.push(callback.call(currentArray, arr[i], i, arr));
     }
     return results;
 };
@@ -93,7 +93,7 @@ const filter = (arr, callback, thisArg) => {
     return results;
 };
 
-
+//4
 
 const nums = [300, 20, 555, 100, 854, 6, 8, 36, 686];
 const data = filter(nums, num => {
@@ -101,3 +101,44 @@ const data = filter(nums, num => {
 });
 
 console.log(data);
+
+
+currentArray = [
+    [1, 2],
+    [3, 5]
+];
+
+const transformArray = (currentArray) => {
+    return currentArray.reduce((result, item) => {
+
+        if (item[1] % 2 === 0) {
+
+            result.push(...item);
+        } else {
+            result.push(item)
+        }
+
+        return result;
+    }, [])
+}
+
+console.log(transformArray(currentArray));
+
+
+const transformNumber = (number) => {
+    const stringNum = number.toString().split('');
+
+    const newNumber = stringNum.map(num => num ** 2);
+
+    const joined = newNumber.join('')
+
+    return +joined
+}
+console.log(transformNumber(15144548));
+
+
+
+
+/* const someFunction = (value, delay) => {
+    return new Promise(resolve => setTimeout(resolve, delay));
+} */
